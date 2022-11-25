@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
-
+import Counter from './Counter/Counter';
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 
@@ -13,23 +13,24 @@ function App() {
         {id: 3, title: 'ReactJS', isDone: false},
         {id: 4, title: 'Redux', isDone: false},
     ]);
-    let [filter, setFilter] = useState<FilterValuesType>('all')
 
-    function removeTask(id: number) {
-       let  filteredTasks = tasks.filter(t => t.id !== id)
-        setTasks(filteredTasks);
+    let [filter,setFilter] = useState<FilterValuesType>("all")
+
+    const removeTask = (id: number) => {
+        let filteredTasks = tasks.filter(t => t.id !== id)
+        setTasks(filteredTasks)
     }
 
-    function changeFilter(value:FilterValuesType ){
-        setFilter(value);
+    const changeFilter = (value:FilterValuesType) =>{
+        setFilter(value)
     }
 
-    let taskForTodoList = tasks;
+    let tasksForTodolist = tasks
     if(filter === 'completed'){
-        taskForTodoList = tasks.filter(t => t.isDone === true );
+        tasksForTodolist = tasks.filter(t => t.isDone)
     }
     if(filter === 'active'){
-        taskForTodoList = tasks.filter(t => t.isDone === false)
+        tasksForTodolist = tasks.filter(t => !t.isDone)
     }
 
 
@@ -37,10 +38,11 @@ function App() {
         <div className="App">
             <Todolist
                 title="What to learn"
-                tasks={taskForTodoList}
+                tasks={tasksForTodolist}
                 removeTask={removeTask}
                 changeFilter={changeFilter}
             />
+            <Counter/>
         </div>
     );
 }
