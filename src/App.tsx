@@ -4,6 +4,8 @@ import {TaskType, Todolist} from './Todolist';
 import Counter from './Counter/Counter';
 import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
+import {AppBar, Button, IconButton, Toolbar, Typography} from '@mui/material';
+import {Menu} from '@mui/icons-material';
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 
@@ -68,7 +70,7 @@ function App() {
 
     function changeTodoListTitle(id: string, newTitle: string) {
         const todoList = todoLists.find(tl => tl.id === id)
-        if(todoList){
+        if (todoList) {
             todoList.title = newTitle
             setTodoLists([...todoLists])
         }
@@ -107,6 +109,17 @@ function App() {
 
     return (
         <div className="App">
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <Menu/>
+                    </IconButton>
+                    <Typography variant="h6">
+                        Todolist
+                    </Typography>
+                    <Button color='inherit'>Login</Button>
+                </Toolbar>
+            </AppBar>
             <AddItemForm
                 addItem={addTodoList}
             />
