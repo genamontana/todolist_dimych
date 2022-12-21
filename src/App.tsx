@@ -4,8 +4,7 @@ import {TaskType, Todolist} from './Todolist';
 import Counter from './Counter/Counter';
 import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@mui/material';
-import {Menu} from '@mui/icons-material';
+import {Container, Grid, Paper,} from '@mui/material';
 import {AppBarMenu} from './AppBarMenu';
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
@@ -112,7 +111,7 @@ function App() {
         <div className="App">
             <AppBarMenu/>
             <Container fixed>
-                <Grid container style={{padding:'20px'}}>
+                <Grid container style={{padding: '20px'}}>
                     <AddItemForm addItem={addTodoList}/>
                 </Grid>
                 <Grid container spacing={3}>
@@ -125,7 +124,7 @@ function App() {
                             tasksForTodolist = tasksForTodolist.filter(t => !t.isDone)
                         }
                         return <Grid item>
-                            <Paper style={{padding:'10px'}}>
+                            <Paper style={{padding: '10px'}}>
                                 <Todolist
                                     key={tl.id}
                                     id={tl.id}
