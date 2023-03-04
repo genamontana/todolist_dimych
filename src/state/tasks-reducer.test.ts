@@ -1,5 +1,5 @@
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './tasks-reducer'
-import { TasksStateType } from '../App'
+import {TasksStateType} from '../App'
 import {addTodoListAC, removeTodoListAC} from './todolists-reducer';
 
 test('correct task should be deleted from correct array', () => {
@@ -151,5 +151,5 @@ test('property with todolistId should be deleted', () => {
     const keys = Object.keys(endState)
 
     expect(keys.length).toBe(1)
-    expect(endState['todolistId2']).not.toBeDefined()
+    expect(endState['todolistId2']).toBeUndefined()
 })

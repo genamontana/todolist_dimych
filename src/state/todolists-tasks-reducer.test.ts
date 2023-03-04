@@ -4,7 +4,7 @@ import {TasksStateType, TodoListType} from '../App';
 
 test('ids should be equals', () => {
     const startTasksState: TasksStateType = {}
-    const startTodolistsState: Array<TodoListType> = []
+    const startTodolistsState: TodoListType[] = []
 
     const action = addTodoListAC('new todolist')
 
