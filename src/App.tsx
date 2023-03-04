@@ -9,13 +9,13 @@ import {AppBarMenu} from './AppBarMenu';
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 
-type TodoListType = {
+export type TodoListType = {
     id: string
     title: string
     filter: FilterValuesType
 }
 
-type TasksStateType = {
+export type TasksStateType = {
     [key: string]: TaskType[]
 }
 
