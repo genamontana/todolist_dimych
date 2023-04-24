@@ -64,16 +64,24 @@ export const UpdateTodolistTitle = () => {
 
 export const GetTasks = () => {
     const [state, setState] = useState<any>(null)
+    const [todolistId, setTodolistId] = useState<string>('')
 
-    useEffect(() => {
-        const todolistId = '4df548bd-e20a-4aa3-be4d-2629f9f3ba10'
+    const getTasks = () => {
         todolistsAPI.getTasks(todolistId)
             .then((res) => {
                 setState(res.data)
             })
-    }, [])
+    }
 
-    return <div>{JSON.stringify(state)}</div>
+    return <div>{JSON.stringify(state)}
+        <div>
+            <input placeholder={'Todolist Id'}
+                   value={todolistId}
+                   onChange={(e) => setTodolistId(e.currentTarget.value)}
+                   type="text"/>
+            <button onClick={getTasks}>GetTasks</button>
+        </div>
+    </div>
 }
 export const DeleteTask = () => {
     const [state, setState] = useState<any>(null)
@@ -91,13 +99,83 @@ export const DeleteTask = () => {
         <div>
             <input placeholder={'todolistId'}
                    value={todolistId}
-                   onChange={(e)=>setTodolistId(e.currentTarget.value)}
+                   onChange={(e) => setTodolistId(e.currentTarget.value)}
                    type="text"/>
             <input placeholder={'taskId'}
                    value={taskId}
-                   onChange={(e)=>setTaskId(e.currentTarget.value)}
+                   onChange={(e) => setTaskId(e.currentTarget.value)}
                    type="text"/>
             <button onClick={deleteTask}></button>
+        </div>
+    </div>
+}
+
+export const CreateTask = () => {
+    const [state, setState] = useState<any>(null)
+    const [taskTitle, setTaskTitle] = useState<string>('')
+    const [todolistId, setTodolistId] = useState<string>('')
+
+    const createTask = () => {
+        todolistsAPI.createTask(todolistId, taskTitle)
+            .then((res) => {
+                setState(res.data)
+            })
+    }
+
+    return <div>{JSON.stringify(state)}
+        <div>
+            <input placeholder={'todolistId'}
+                   value={todolistId}
+                   onChange={(e) => setTodolistId(e.currentTarget.value)}
+                   type="text"/>
+            <input placeholder={'Task Title'}
+                   value={taskTitle}
+                   onChange={(e) => setTaskTitle(e.currentTarget.value)}
+                   type="text"/>
+            <button onClick={createTask}>CreateTask</button>
+        </div>
+    </div>
+}
+
+export const UpdateTask = () => {
+    const [state, setState] = useState<any>(null)
+    const [title, setTitle] = useState<string>('title 1')
+    const [description, setDescription] = useState<string>('description 1')
+    const [status, setStatus] = useState<number>(0)
+    const [priority, setPriority] = useState<number>(0)
+    const [startDate, setStartDate] = useState<string>('')
+    const [deadline, setDeadline] = useState<string>('')
+
+    const [todolistId, setTodolistId] = useState<string>('')
+    const [taskId, setTaskId] = useState<string>('')
+
+    const createTask = () => {
+        todolistsAPI.updateTask(todolistId, taskId, {
+            deadline: '',
+            description: description,
+            priority: priority,
+            startDate: '',
+            status: status,
+            title: title
+        })
+            .then((res) => {
+                setState(res.data)
+            })
+    }
+
+    return <div>{JSON.stringify(state)}
+        <div>
+            <input placeholder={'taskId'} value={taskId} onChange={(e) => setTaskId(e.currentTarget.value)}/>
+            <input placeholder={'todolistId'} value={todolistId}
+                   onChange={(e) => setTodolistId(e.currentTarget.value)}/>
+            <input placeholder={'Task Title'} value={title} onChange={(e) => setTitle(e.currentTarget.value)}/>
+            <input placeholder={'Description'} value={description}
+                   onChange={(e) => setDescription(e.currentTarget.value)}/>
+            <input placeholder={'Status'} value={status} type="number"
+                   onChange={(e) => setStatus(+e.currentTarget.value)}/>
+            <input placeholder={'Priority'} value={priority} type="number"
+                   onChange={(e) => setPriority(+e.currentTarget.value)}/>
+            <button onClick={createTask}>UpdateTask</button>
         </div>
     </div>
 }
