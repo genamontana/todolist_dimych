@@ -2,11 +2,10 @@ import React, {useCallback} from 'react'
 import {AddItemForm} from './AddItemForm'
 import {EditableSpan} from './EditableSpan'
 import {Task} from './Task'
-import {Button, IconButton} from "@mui/material";
-import {Delete} from "@mui/icons-material";
+import {Button, IconButton} from '@mui/material';
+import {Delete} from '@mui/icons-material';
 import {TaskStatuses, TaskType} from './api/todolists-api';
-import { FilterValuesType } from './state/todolists-reducer';
-
+import {FilterValuesType} from './state/todolists-reducer';
 
 
 type PropsType = {
@@ -44,10 +43,10 @@ export const Todolist = React.memo(function (props: PropsType) {
     let tasksForTodolist = props.tasks
 
     if (props.filter === 'active') {
-        tasksForTodolist = props.tasks.filter(t => t.isDone === false)
+        tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.New)
     }
     if (props.filter === 'completed') {
-        tasksForTodolist = props.tasks.filter(t => t.isDone === true)
+        tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.Completed)
     }
 
     return <div>
