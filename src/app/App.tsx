@@ -4,6 +4,9 @@ import {AppBar, Button, Container, IconButton, LinearProgress, Toolbar, Typograp
 import {Menu} from '@mui/icons-material';
 import {TodolistsList} from '../features/TodolistsList/TodolistsList';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
+import {useSelector} from 'react-redux';
+import {AppRootStateType} from './store';
+import {RequestStatusType} from './app-reducer';
 
 /*
 const Fake = React.memo(function() {
@@ -14,6 +17,9 @@ const Fake = React.memo(function() {
 */
 
 function App() {
+    const status = useSelector<AppRootStateType, RequestStatusType>
+    ((state) => state.app.status)
+
     return (
         <div className="App">
             <ErrorSnackbar/>
@@ -27,7 +33,7 @@ function App() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
-                <LinearProgress/>
+                {status === 'loading' && <LinearProgress/>}
             </AppBar>
             <Container fixed>
                 <TodolistsList/>
