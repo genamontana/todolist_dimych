@@ -3,6 +3,8 @@ import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelTyp
 import {Dispatch} from 'redux';
 import {AppRootStateType} from '../../app/store';
 import {setAppErrorAC, SetErrorActionType, setAppStatusAC, SetStatusActionType} from '../../app/app-reducer';
+import {Simulate} from 'react-dom/test-utils';
+import error = Simulate.error;
 
 const initialState: TasksStateType = {
     count: []
@@ -79,6 +81,10 @@ export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispa
                 }
                 dispatch(setAppStatusAC('failed'))
             }
+        })
+        .catch((error) => {
+            dispatch(setAppErrorAC(error.message))
+            dispatch(setAppStatusAC('failed'))
         })
 }
 export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string) =>
