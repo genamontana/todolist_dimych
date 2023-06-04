@@ -8,15 +8,12 @@ import {useSelector} from 'react-redux';
 import {AppRootStateType} from './store';
 import {RequestStatusType} from './app-reducer';
 
-/*
-const Fake = React.memo(function() {
-    console.log("FAKE")
-    const arr = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks.count)
-    return <h1>{arr.length}</h1>
-})
-*/
 
-function App() {
+type PropsType = {
+    demo?: boolean
+}
+
+function App({demo = false}: PropsType) {
     const status = useSelector<AppRootStateType, RequestStatusType>
     ((state) => state.app.status)
 
@@ -36,7 +33,7 @@ function App() {
                 {status === 'loading' && <LinearProgress/>}
             </AppBar>
             <Container fixed>
-                <TodolistsList/>
+                <TodolistsList demo={demo}/>
             </Container>
         </div>
     );
