@@ -46,7 +46,9 @@ export const AddItemForm = React.memo(({addItem, disabled = false}: AddItemFormP
                    label="Title"
                    helperText={error}
         />
-        <IconButton color="primary" onClick={addItemHandler} disabled={disabled}>
+        <IconButton color="primary"
+                    onClick={addItemHandler}
+                    disabled={disabled}>
             <AddBox/>
         </IconButton>
     </div>
